@@ -12,13 +12,13 @@ public class PetStoreUsersTests extends BaseTest {
     private static final PetStoreUsersEndPoints PET_STORE_USERS_END_POINTS = new PetStoreUsersEndPoints();
 
     @Test(description = "Создание пользователя")
-    public void createUser(){
+    public void createUserTest(){
         //given
         User user = User.createUser();
         //when
         PET_STORE_USERS_END_POINTS.createUser(user);
         //then
-        User createdUserFromService = PET_STORE_USERS_END_POINTS.getUsername(user.getUsername()).as(User.class);
+        User createdUserFromService = PET_STORE_USERS_END_POINTS.getUserByUsername(user.getUsername()).as(User.class);
 
         SoftAssert assertions = new SoftAssert();
         assertions.assertEquals(createdUserFromService.getFirstName(), user.getFirstName());
@@ -30,7 +30,7 @@ public class PetStoreUsersTests extends BaseTest {
     }
 
     @Test(description = "Удаление пользователя")
-    public void deleteOrder(){
+    public void deleteOrderTest(){
         //given
         User user = User.createUser();
         PET_STORE_USERS_END_POINTS.createUser(user);
@@ -38,9 +38,29 @@ public class PetStoreUsersTests extends BaseTest {
         //when
         PET_STORE_USERS_END_POINTS.deleteUserByUsername(username);
         //then
-        Response userByUsername = PET_STORE_USERS_END_POINTS.getUsername(username);
+        Response userByUsername = PET_STORE_USERS_END_POINTS.getUserByUsername(username);
         SoftAssert assertions = new SoftAssert();
         assertions.assertEquals(userByUsername.getStatusCode(), 404);
+        assertions.assertAll();
+    }
+
+    @Test(description = "Поиск пользователя")
+    public void getUserByUserNameTest(){
+        //given
+        User user = User.createUser();
+        PET_STORE_USERS_END_POINTS.createUser(user);
+        //when
+        User createdUserFromService = PET_STORE_USERS_END_POINTS.getUserByUsername(user.getUsername()).as(User.class);
+        //then
+        SoftAssert assertions = new SoftAssert();
+        assertions.assertEquals(createdUserFromService.getFirstName(), user.getFirstName());
+        assertions.assertEquals(createdUserFromService.getUsername(), user.getUsername());
+        assertions.assertEquals(createdUserFromService.getLastName(), user.getLastName());
+        assertions.assertEquals(createdUserFromService.getUserStatus(), user.getUserStatus());
+        assertions.assertEquals(createdUserFromService.getEmail(), user.getEmail());
+        assertions.assertEquals(createdUserFromService.getPhone(), user.getPhone());
+        assertions.assertEquals(createdUserFromService.getPassword(), user.getPassword());
+        assertions.assertEquals(createdUserFromService.getId(), user.getId());
         assertions.assertAll();
     }
 
