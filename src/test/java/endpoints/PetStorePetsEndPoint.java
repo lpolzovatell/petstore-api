@@ -10,6 +10,7 @@ import static io.restassured.RestAssured.given;
 public class PetStorePetsEndPoint {
 
     private static final String ADD_NEW_PET = PropertiesController.getProperty("petstore.add.pet");
+    private static final String FIND_PET_BY_ID = PropertiesController.getProperty("petstore.get.by.pet");
 
     public Response addPet(Pet pet) {
         Response response = given()
@@ -21,6 +22,13 @@ public class PetStorePetsEndPoint {
                 .then()
                 .assertThat()
                 .statusCode(HttpStatus.SC_OK);
-        return null;
+        return response;
+    }
+
+    public Response getStorePetById(int id) {
+        return given()
+                .when()
+                .pathParam("petId", id)
+                .get(FIND_PET_BY_ID);
     }
 }

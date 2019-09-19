@@ -5,14 +5,14 @@ public class Tags {
     private int id;
     private String name;
 
-    public Tags(int id, String name) {
-        this.id = id;
-        this.name = name;
+    public Tags() {
+        id = (int)(Math.random()*1000);
+        name = "TestTagName1";
     }
 
     // Getter Methods
 
-    public float getId() {
+    public int getId() {
         return id;
     }
 
@@ -30,4 +30,21 @@ public class Tags {
         this.name = name;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Tags tags = (Tags) o;
+
+        if (id != tags.id) return false;
+        return name.equals(tags.name);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + name.hashCode();
+        return result;
+    }
 }
