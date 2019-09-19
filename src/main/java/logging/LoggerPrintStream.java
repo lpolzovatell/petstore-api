@@ -1,0 +1,39 @@
+package logging;
+
+import org.slf4j.Logger;
+
+import java.io.OutputStream;
+import java.io.PrintStream;
+
+public class LoggerPrintStream {
+
+    private Logger myLog;
+    private PrintStream myPrintStream;
+
+    public LoggerPrintStream(Logger aLogger) {
+        myLog = aLogger;
+    }
+
+    public PrintStream getPrintStream() {
+        if (myPrintStream == null) {
+            OutputStream output = new OutputStream() {
+                private StringBuilder myStringBuilder = new StringBuilder();
+
+                @Override
+                public void write(int b) {
+                    this.myStringBuilder.append((char) b);
+                }
+
+                @Override
+                public void flush() {
+                    myLog.debug(this.myStringBuilder.toString());
+                    myStringBuilder = new StringBuilder();
+                }
+            };
+
+            myPrintStream = new PrintStream(output, true);
+        }
+        return myPrintStream;
+    }
+
+}
