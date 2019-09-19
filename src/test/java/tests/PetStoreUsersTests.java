@@ -2,6 +2,7 @@ package tests;
 
 import endpoints.PetStoreUsersEndPoints;
 import io.restassured.response.Response;
+
 import models.User;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
@@ -42,4 +43,5 @@ public class PetStoreUsersTests extends BaseTest {
         assertions.assertEquals(userByUsername.getStatusCode(), 404);
         assertions.assertAll();
     }
+
 }

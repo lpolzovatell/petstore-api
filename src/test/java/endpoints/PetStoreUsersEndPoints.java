@@ -40,4 +40,5 @@ public class PetStoreUsersEndPoints {
                 .pathParam("username", username)
                 .delete(GET_USER_USERNAME);
     }
+
 }
