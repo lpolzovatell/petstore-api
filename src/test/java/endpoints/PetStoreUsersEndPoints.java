@@ -33,4 +33,12 @@ public class PetStoreUsersEndPoints {
 
         return response;
     }
+
+    public Response deleteUserByUsername(String username) {
+        return given()
+                .when()
+                .pathParam("username", username)
+                .delete(GET_USER_USERNAME);
+    }
+
 }
