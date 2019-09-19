@@ -14,11 +14,11 @@ public class PetStoreUsersTests extends BaseTest {
     @Test(description = "Создание пользователя")
     public void createUser(){
         //given
-        User user = User.createUser();
+        User user = User.createDefaultUser();
         //when
         PET_STORE_USERS_END_POINTS.createUser(user);
         //then
-        User createdUserFromService = PET_STORE_USERS_END_POINTS.getUsername(user.getUsername()).as(User.class);
+        User createdUserFromService = PET_STORE_USERS_END_POINTS.getUsername(user.getUserName()).as(User.class);
 
         SoftAssert assertions = new SoftAssert();
         assertions.assertEquals(createdUserFromService.getFirstName(), user.getFirstName());

@@ -2,14 +2,28 @@ package models;
 
 public class User {
     private int id;
-    private String username;
+    private String userName;
     private String firstName;
     private String lastName;
     private String email;
     private String password;
     private String phone;
-    private int userStatus;
+    private String userStatus;
+    private static int count = 0;
 
+    public static User createDefaultUser(){
+        User user = new User();
+        count++;
+        user.setId(count);
+        user.setUserName("user"+count);
+        user.setFirstName("Petr"+count);
+        user.setLastName("Ivanov"+count);
+        user.setEmail("petya"+count+"@mail.ru");
+        user.setPassword("petrivanov");
+        user.setPhone("555-"+count+"-333");
+        user.setUserStatus("Slavniy status");
+        return user;
+    }
     public int getId() {
         return id;
     }
@@ -18,12 +32,12 @@ public class User {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getFirstName() {
@@ -66,24 +80,11 @@ public class User {
         this.phone = phone;
     }
 
-    public int getUserStatus() {
+    public String getUserStatus() {
         return userStatus;
     }
 
-    public void setUserStatus(int userStatus) {
+    public void setUserStatus(String userStatus) {
         this.userStatus = userStatus;
-    }
-
-    public static User createUser() {
-        User user = new User();
-        user.setId((int)(Math.random()*1000));
-        user.setUsername("IAmUser");
-        user.setFirstName("Alex");
-        user.setLastName("Done");
-        user.setEmail("myemail@email.com");
-        user.setPassword("2641564");
-        user.setPhone("8-964-458-45-55");
-        user.setUserStatus(1);
-        return user;
     }
 }
