@@ -12,14 +12,6 @@ public class PetStoreUsersEndPoints {
     private static final String CREATE_USER = PropertiesController.getProperty("petstore.create.user");
     private static final String GET_USER_USERNAME = PropertiesController.getProperty("petstore.get.by.username");
 
-
-    public Response getUsername(String username) {
-        return given()
-                .when()
-                .pathParam("username", username)
-                .get(GET_USER_USERNAME);
-    }
-
     public Response createUser(User user) {
         Response response = given()
                 .body(user)
@@ -39,6 +31,13 @@ public class PetStoreUsersEndPoints {
                 .when()
                 .pathParam("username", username)
                 .delete(GET_USER_USERNAME);
+    }
+
+    public Response getUserByUsername(String username) {
+        return given()
+                .when()
+                .pathParam("username", username)
+                .get(GET_USER_USERNAME);
     }
 
 }

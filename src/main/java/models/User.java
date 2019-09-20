@@ -1,29 +1,17 @@
 package models;
 
+import java.util.Objects;
+
 public class User {
     private int id;
-    private String userName;
+    private String username;
     private String firstName;
     private String lastName;
     private String email;
     private String password;
     private String phone;
-    private String userStatus;
-    private static int count = 0;
+    private int userStatus;
 
-    public static User createDefaultUser(){
-        User user = new User();
-        count++;
-        user.setId(count);
-        user.setUserName("user"+count);
-        user.setFirstName("Petr"+count);
-        user.setLastName("Ivanov"+count);
-        user.setEmail("petya"+count+"@mail.ru");
-        user.setPassword("petrivanov");
-        user.setPhone("555-"+count+"-333");
-        user.setUserStatus("Slavniy status");
-        return user;
-    }
     public int getId() {
         return id;
     }
@@ -32,12 +20,12 @@ public class User {
         this.id = id;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getFirstName() {
@@ -80,11 +68,45 @@ public class User {
         this.phone = phone;
     }
 
-    public String getUserStatus() {
+    public int getUserStatus() {
         return userStatus;
     }
 
-    public void setUserStatus(String userStatus) {
+    public void setUserStatus(int userStatus) {
         this.userStatus = userStatus;
+    }
+
+    public static User createUser() {
+        User user = new User();
+        user.setId((int)(Math.random()*1000));
+        user.setUsername("IAmUser");
+        user.setFirstName("Alex");
+        user.setLastName("Done");
+        user.setEmail("myemail@email.com");
+        user.setPassword("2641564");
+        user.setPhone("8-964-458-45-55");
+        user.setUserStatus(1);
+        return user;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return id == user.id &&
+                userStatus == user.userStatus &&
+                Objects.equals(username, user.username) &&
+                Objects.equals(firstName, user.firstName) &&
+                Objects.equals(lastName, user.lastName) &&
+                Objects.equals(email, user.email) &&
+                Objects.equals(password, user.password) &&
+                Objects.equals(phone, user.phone);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, username, firstName, lastName, email, password, phone, userStatus);
     }
 }
