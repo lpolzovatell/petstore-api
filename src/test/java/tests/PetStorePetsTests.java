@@ -42,4 +42,34 @@ public class PetStorePetsTests extends BaseTest {
         assertions.assertFalse(pets.isEmpty());
         assertions.assertAll();
     }
+
+    @Test(description = "Обновление питомца")
+    public void updatePetTest() {
+        Pet pet = Pet.createDefaultPet();
+        PET_STORE_PET_POINTS.addPet(pet);
+        pet.setName("newPetName");
+
+        PET_STORE_PET_POINTS.updatePet(pet);
+
+        Pet updatedPetFromService = PET_STORE_PET_POINTS.getStorePetById(pet.getId()).as(Pet.class);
+        SoftAssert assertions = new SoftAssert();
+        assertions.assertEquals(updatedPetFromService.getId(), pet.getId());
+        assertions.assertEquals(updatedPetFromService.getName(), pet.getName());
+        assertions.assertEquals(updatedPetFromService.getStatus(), pet.getStatus());
+        assertions.assertAll();
+    }
+
+    @Test(description = "Удаление питомца по ID")
+    public void deletePetByIdTest() {
+        Pet pet = Pet.createDefaultPet();
+        PET_STORE_PET_POINTS.addPet(pet);
+        long petID = pet.getId();
+
+        PET_STORE_PET_POINTS.deletePetByID(petID);
+
+        Response petById = PET_STORE_PET_POINTS.getStorePetById(petID);
+        SoftAssert assertions = new SoftAssert();
+        assertions.assertEquals(petById.getStatusCode(), 404);
+        assertions.assertAll();
+    }
 }
