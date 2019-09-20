@@ -48,21 +48,4 @@ public class Tags {
         return result;
     }
 
-    //    @Override
-//    public boolean equals(Object o) {
-//        if (this == o) return true;
-//        if (o == null || getClass() != o.getClass()) return false;
-//
-//        Tags tags = (Tags) o;
-//
-//        if (id != tags.id) return false;
-//        return name.equals(tags.name);
-//    }
-//
-//    @Override
-//    public int hashCode() {
-//        int result = id;
-//        result = 31 * result + name.hashCode();
-//        return result;
-//    }
 }
