@@ -1,7 +1,6 @@
 package endpoints;
 
 import io.restassured.response.Response;
-import io.restassured.response.ResponseBody;
 import models.User;
 import org.apache.http.HttpStatus;
 import utils.PropertiesController;
@@ -74,10 +73,6 @@ public class PetStoreUsersEndPoints {
         Response response = given()
                 .when()
                 .get(LOGOUT);
-        response
-                .then()
-                .assertThat()
-                .statusCode(HttpStatus.SC_OK);
         return response;
     }
   

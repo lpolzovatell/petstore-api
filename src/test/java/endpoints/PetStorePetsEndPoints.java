@@ -8,6 +8,7 @@ import utils.PropertiesController;
 import static io.restassured.RestAssured.given;
 
 public class PetStorePetsEndPoints {
+
     private static final String FIND_PETS = PropertiesController.getProperty("petstore.get.petsby.status");
     private static final String ADD_NEW_PET = PropertiesController.getProperty("petstore.add.pet");
     private static final String FIND_PET_BY_ID = PropertiesController.getProperty("petstore.get.by.pet");
@@ -60,4 +61,5 @@ public class PetStorePetsEndPoints {
                 .pathParam("petId", petId)
                 .delete(DELETE_PET_BY_ID);
     }
+
 }

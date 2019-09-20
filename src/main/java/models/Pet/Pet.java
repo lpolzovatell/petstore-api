@@ -14,7 +14,6 @@ public class Pet {
 
     private Category categoryObject;
 
-    // Getter Methods
     public long getId() {
         return id;
     }
@@ -30,8 +29,6 @@ public class Pet {
     public String getStatus() {
         return status;
     }
-
-    // Setter Methods
 
     public void setId(long id) {
         this.id = id;
@@ -66,26 +63,20 @@ public class Pet {
     }
 
     public static Pet createDefaultPet() {
-
         ArrayList<String> urlPhoto = new ArrayList<>();
         ArrayList<Tags> tags = new ArrayList<>();
-
         urlPhoto.add("https://pbs.twimg.com/profile_images/429645944754159616/jzY41c_k.png");
         tags.add(new Tags());
-
         Pet pet = new Pet();
         pet.setId((long)(Math.random()*1000));
         pet.setName("Vincent");
         pet.setStatus("available");
         pet.setPhotoUrls(urlPhoto);
         pet.setTags(tags);
-
         Category category = new Category();
         category.setId((long) (Math.random()*1000));
         category.setName("category");
-
         pet.setCategory(category);
-
         return pet;
     }
 
@@ -106,5 +97,6 @@ public class Pet {
     public int hashCode() {
         return Objects.hash(getId(), getName(), getStatus(), getPhotoUrls(), getTags(), categoryObject);
     }
+
 }
 
