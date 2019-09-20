@@ -1,6 +1,7 @@
 package models.Pet;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Pet {
 
@@ -88,5 +89,22 @@ public class Pet {
         return pet;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Pet pet = (Pet) o;
+        return getId() == pet.getId() &&
+                Objects.equals(getName(), pet.getName()) &&
+                Objects.equals(getStatus(), pet.getStatus()) &&
+                Objects.equals(getPhotoUrls(), pet.getPhotoUrls()) &&
+                Objects.equals(getTags(), pet.getTags()) &&
+                Objects.equals(categoryObject, pet.categoryObject);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getName(), getStatus(), getPhotoUrls(), getTags(), categoryObject);
+    }
 }
 
