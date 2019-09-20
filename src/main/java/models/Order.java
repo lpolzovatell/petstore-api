@@ -1,25 +1,25 @@
 package models;
 
 public class Order {
-    private int id;
-    private int petId;
+    private long id;
+    private long petId;
     private int quantity;
     private Status status;
     private boolean complete;
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public int getPetId() {
+    public long getPetId() {
         return petId;
     }
 
-    public void setPetId(int petId) {
+    public void setPetId(long petId) {
         this.petId = petId;
     }
 

@@ -64,4 +64,28 @@ public class PetStoreUsersTests extends BaseTest {
         assertions.assertAll();
     }
 
+    @Test(description = "Logout")
+    public void logoutTest() {
+        PET_STORE_USERS_END_POINTS.logout();
+    }
+
+    @Test(description = "Обновление пользователя")
+    public void updateUserByUsernameTest(){
+        User user = User.createUser();
+        PET_STORE_USERS_END_POINTS.createUser(user);
+        String username = user.getUsername();
+        user.setUsername("newUsername");
+
+        PET_STORE_USERS_END_POINTS.updateUserByUsername(user, username);
+
+        User updatedUserFromService = PET_STORE_USERS_END_POINTS.getUserByUsername(user.getUsername()).as(User.class);
+        SoftAssert assertions = new SoftAssert();
+        assertions.assertEquals(updatedUserFromService.getUsername(), user.getUsername());
+        assertions.assertEquals(updatedUserFromService.getFirstName(), user.getFirstName());
+        assertions.assertEquals(updatedUserFromService.getLastName(), user.getLastName());
+        assertions.assertEquals(updatedUserFromService.getUserStatus(), user.getUserStatus());
+        assertions.assertEquals(updatedUserFromService.getEmail(), user.getEmail());
+        assertions.assertEquals(updatedUserFromService.getPhone(), user.getPhone());
+        assertions.assertAll();
+    }
 }
