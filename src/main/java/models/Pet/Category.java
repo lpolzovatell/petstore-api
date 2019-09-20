@@ -2,12 +2,12 @@ package models.Pet;
 
 class Category {
 
-    private int id;
+    private long id;
     private String name;
 
     // Getter Methods
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -17,7 +17,7 @@ class Category {
 
     // Setter Methods
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -38,8 +38,27 @@ class Category {
 
     @Override
     public int hashCode() {
-        int result = id;
+        int result = (int) (id ^ (id >>> 32));
         result = 31 * result + name.hashCode();
         return result;
     }
+
+    //    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//
+//        Category category = (Category) o;
+//
+//        if (id != category.id) return false;
+//        return name.equals(category.name);
+//    }
+
+
+//    @Override
+//    public int hashCode() {
+//        int result = id;
+//        result = 31 * result + name.hashCode();
+//        return result;
+//    }
 }

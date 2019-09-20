@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Pet {
 
-    private int id;
+    private long id;
     private String name;
     private String status;
 
@@ -14,7 +14,7 @@ public class Pet {
     private Category categoryObject;
 
     // Getter Methods
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -32,7 +32,7 @@ public class Pet {
 
     // Setter Methods
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

@@ -2,7 +2,7 @@ package models.Pet;
 
 public class Tags {
 
-    private int id;
+    private long id;
     private String name;
 
     public Tags() {
@@ -12,7 +12,7 @@ public class Tags {
 
     // Getter Methods
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -22,7 +22,7 @@ public class Tags {
 
     // Setter Methods
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -43,8 +43,26 @@ public class Tags {
 
     @Override
     public int hashCode() {
-        int result = id;
+        int result = (int) (id ^ (id >>> 32));
         result = 31 * result + name.hashCode();
         return result;
     }
+
+    //    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//
+//        Tags tags = (Tags) o;
+//
+//        if (id != tags.id) return false;
+//        return name.equals(tags.name);
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//        int result = id;
+//        result = 31 * result + name.hashCode();
+//        return result;
+//    }
 }
