@@ -11,6 +11,9 @@ public class PetStoreUsersEndPoints {
 
     private static final String CREATE_USER = PropertiesController.getProperty("petstore.create.user");
     private static final String GET_USER_USERNAME = PropertiesController.getProperty("petstore.get.by.username");
+    private static final String UPDATE_USER_BY_USERNAME = PropertiesController.getProperty("petstore.update.user.by.username");
+    private static final String LOGOUT = PropertiesController.getProperty("petstore.logout");
+
 
     public Response createUser(User user) {
         Response response = given()
@@ -40,4 +43,28 @@ public class PetStoreUsersEndPoints {
                 .get(GET_USER_USERNAME);
     }
 
+    public Response updateUserByUsername(User user, String username) {
+        Response response = given()
+                .header("Content-type", "application/json")
+                .body(user)
+                .when()
+                .pathParam("username", username)
+                .put(UPDATE_USER_BY_USERNAME);
+        response
+                .then()
+                .assertThat()
+                .statusCode(HttpStatus.SC_OK);
+        return response;
+    }
+
+    public Response logout() {
+        Response response = given()
+                .when()
+                .get(LOGOUT);
+        response
+                .then()
+                .assertThat()
+                .statusCode(HttpStatus.SC_OK);
+        return response;
+    }
 }
