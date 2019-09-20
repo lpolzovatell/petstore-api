@@ -6,25 +6,22 @@ import models.User;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-public class UserGetLoginTest {
+public class UserGetLoginTest extends BaseTest{
 
-
+    private  final String ANSWER_REGISTRATION = "logged in user session:";
     private static final PetStoreUsersEndPoints PET_STORE_USERS_END_POINTS = new PetStoreUsersEndPoints();
 
-    @Test(description = "Создание заявки")
-    public void getUserLogin() {
+    @Test(description = "Авторизация пользователя")
+    public void getLoginAndPassUser() {
         //given
-        User user = User.createDefaultUser();
+        User user = User.createUser();
         //when
-        Response userFromResponse = PET_STORE_USERS_END_POINTS.createUser(new User());
-        //then
-        int createdUserId = userFromResponse.body().as(User.class).getId();
-        User createdUserFromService = PET_STORE_USERS_END_POINTS.getUsername(user.getUserName()).as(User.class);
+        Response userFromResponse = PET_STORE_USERS_END_POINTS.sendUserToServis(user);
+
+        String responseFromService = userFromResponse.body().asString();
 
         SoftAssert assertions = new SoftAssert();
-        assertions.assertEquals(createdUserFromService.getId(), user.getId());
-        assertions.assertEquals(createdUserFromService.getUserName(), user.getUserName());
-
+        assertions.assertEquals(responseFromService, ANSWER_REGISTRATION + Long.parseLong(responseFromService.replace(ANSWER_REGISTRATION, "")));
     }
 
 }
