@@ -73,14 +73,14 @@ public class Pet {
         tags.add(new Tags());
 
         Pet pet = new Pet();
-        pet.setId((int)(Math.random()*1000));
+        pet.setId((long)(Math.random()*1000));
         pet.setName("Vincent");
         pet.setStatus("available");
         pet.setPhotoUrls(urlPhoto);
         pet.setTags(tags);
 
         Category category = new Category();
-        category.setId((int)(Math.random()*1000));
+        category.setId((long) (Math.random()*1000));
         category.setName("category");
 
         pet.setCategory(category);

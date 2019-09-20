@@ -6,7 +6,7 @@ public class Tags {
     private String name;
 
     public Tags() {
-        id = (int)(Math.random()*1000);
+        id = (long) (Math.random()*1000);
         name = "TestTagName1";
     }
 
