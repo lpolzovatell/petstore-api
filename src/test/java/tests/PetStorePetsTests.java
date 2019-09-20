@@ -18,7 +18,19 @@ public class PetStorePetsTests extends BaseTest {
 
         Pet pet = Pet.createDefaultPet();
         Response petFromResponse = PET_STORE_PET_POINTS.addPet(pet);
+
+        long addPetId = petFromResponse.body().as(Pet.class).getId();
+        Pet addPetFromService = PET_STORE_PET_POINTS.getStorePetById(addPetId).as(Pet.class);
+
         SoftAssert assertions = new SoftAssert();
+        assertions.assertEquals(addPetFromService.getId(), pet.getId());
+        assertions.assertEquals(addPetFromService.getName(), pet.getName());
+        assertions.assertEquals(addPetFromService.getTags(), pet.getTags());
+        assertions.assertEquals(addPetFromService.getStatus(), pet.getStatus());
+        assertions.assertEquals(addPetFromService.getCategory(), pet.getCategory());
+        assertions.assertEquals(addPetFromService.getPhotoUrls(), pet.getPhotoUrls());
+        assertions.assertAll();
+
     }
 
     @Test
@@ -31,6 +43,6 @@ public class PetStorePetsTests extends BaseTest {
         SoftAssert assertions = new SoftAssert();
         assertions.assertEquals(response.getStatusCode(), 200);
         assertions.assertTrue(pets.size() > 6000);
-        assertions.assertAll();
+//        assertions.assertAll();
     }
 }
