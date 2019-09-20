@@ -5,8 +5,6 @@ import models.Pet.Pet;
 import org.apache.http.HttpStatus;
 import utils.PropertiesController;
 
-import java.net.URI;
-
 import static io.restassured.RestAssured.given;
 
 public class PetStorePetsEndPoints {

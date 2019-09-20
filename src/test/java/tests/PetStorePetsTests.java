@@ -10,26 +10,36 @@ import java.util.List;
 
 public class PetStorePetsTests extends BaseTest {
 
+    private Pet pet;
     private static final PetStorePetsEndPoints PET_STORE_PET_POINTS = new PetStorePetsEndPoints();
 
     @Test
-    public void AddANewPetToTheStore() {
-
-        Pet pet = Pet.createDefaultPet();
-        Response petFromResponse = PET_STORE_PET_POINTS.addPet(pet);
-
-        long addPetId = petFromResponse.body().as(Pet.class).getId();
-        Pet addPetFromService = PET_STORE_PET_POINTS.getStorePetById(addPetId).as(Pet.class);
+    public void addANewPetToTheStore() {
+        pet = Pet.createDefaultPet();
+        Pet petFromResponse = PET_STORE_PET_POINTS.addPet(pet).as(Pet.class);
 
         SoftAssert assertions = new SoftAssert();
-        assertions.assertEquals(addPetFromService.getId(), pet.getId());
-        assertions.assertEquals(addPetFromService.getName(), pet.getName());
-        assertions.assertEquals(addPetFromService.getTags(), pet.getTags());
-        assertions.assertEquals(addPetFromService.getStatus(), pet.getStatus());
-        assertions.assertEquals(addPetFromService.getCategory(), pet.getCategory());
-        assertions.assertEquals(addPetFromService.getPhotoUrls(), pet.getPhotoUrls());
+        assertions.assertEquals(petFromResponse.getId(), pet.getId());
+        assertions.assertEquals(petFromResponse.getName(), pet.getName());
+        assertions.assertEquals(petFromResponse.getTags(), pet.getTags());
+        assertions.assertEquals(petFromResponse.getStatus(), pet.getStatus());
+        assertions.assertEquals(petFromResponse.getCategory(), pet.getCategory());
+        assertions.assertEquals(petFromResponse.getPhotoUrls(), pet.getPhotoUrls());
         assertions.assertAll();
+    }
 
+    @Test
+    public void getPetById() {
+        Pet petFromResponse = PET_STORE_PET_POINTS.getStorePetById(pet.getId()).as(Pet.class);
+
+        SoftAssert assertions = new SoftAssert();
+        assertions.assertEquals(petFromResponse.getId(), pet.getId());
+        assertions.assertEquals(petFromResponse.getName(), pet.getName());
+        assertions.assertEquals(petFromResponse.getTags(), pet.getTags());
+        assertions.assertEquals(petFromResponse.getStatus(), pet.getStatus());
+        assertions.assertEquals(petFromResponse.getCategory(), pet.getCategory());
+        assertions.assertEquals(petFromResponse.getPhotoUrls(), pet.getPhotoUrls());
+        assertions.assertAll();
     }
 
     @Test
