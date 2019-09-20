@@ -1,11 +1,10 @@
 package models.Pet;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Pet {
 
-    private int id;
+    private long id;
     private String name;
     private String status;
 
@@ -15,7 +14,7 @@ public class Pet {
     private Category categoryObject;
 
     // Getter Methods
-    public float getId() {
+    public long getId() {
         return id;
     }
 
@@ -33,7 +32,7 @@ public class Pet {
 
     // Setter Methods
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -65,25 +64,23 @@ public class Pet {
         return tags;
     }
 
-
-
     public static Pet createDefaultPet() {
 
         ArrayList<String> urlPhoto = new ArrayList<>();
         ArrayList<Tags> tags = new ArrayList<>();
 
         urlPhoto.add("https://pbs.twimg.com/profile_images/429645944754159616/jzY41c_k.png");
-        tags.add(new Tags(12, "TagName1"));
+        tags.add(new Tags());
 
         Pet pet = new Pet();
-        pet.setId(1);
+        pet.setId((int)(Math.random()*1000));
         pet.setName("Vincent");
         pet.setStatus("available");
         pet.setPhotoUrls(urlPhoto);
         pet.setTags(tags);
 
         Category category = new Category();
-        category.setId(1);
+        category.setId((int)(Math.random()*1000));
         category.setName("category");
 
         pet.setCategory(category);
