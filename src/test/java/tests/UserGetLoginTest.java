@@ -12,7 +12,7 @@ public class UserGetLoginTest extends BaseTest{
     private static final PetStoreUsersEndPoints PET_STORE_USERS_END_POINTS = new PetStoreUsersEndPoints();
 
     @Test(description = "Авторизация пользователя")
-    public void getLoginAndPassUser() {
+    public void userAuthorization() {
         //given
         User user = User.createUser();
         //when
